@@ -89,7 +89,7 @@ function buildCharts(sample) {
         sample_values: result.sample_values[i]
       });
     }
-    console.log(sample_result);
+
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
 
 
@@ -103,8 +103,6 @@ function buildCharts(sample) {
     var x = sample_result.sort((a,b) => 
     b.sample_values - a.sample_values).slice(0,10).reverse().map(value => value.sample_values)
 
-    console.log(x)
-    // console.log(otu_ids
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = [{
       x: x,
