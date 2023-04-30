@@ -67,7 +67,7 @@ function buildCharts(sample) {
     // Deliverable 1: 5. Create a variable that holds the first sample in the array.
     var resultArray = selectedSample.filter(sampleObj => sampleObj.id == sample);
     var result = resultArray[0];
-
+    console.log(result);
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
    
     
@@ -77,10 +77,19 @@ function buildCharts(sample) {
     var PANEL = d3.select("#sample-metadata");
 
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
+    var sample_result = []
+   
     var otu_ids = result.otu_ids;
     var otu_labels = result.otu_labels;
-    var sample_values = result.sample_values;
-
+    var sample_values = result.sample_values//.slice(0,10).sort((a,b) => a-b);
+    console.log(sample_values)
+    for (var i = 0; i < sample_values.length; i ++) {
+      sample_result.push({
+        otu_ids: result.otu_ids[i],
+        sample_values: result.sample_values[i]
+      });
+    }
+    console.log(sample_result);
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
 
 
@@ -88,13 +97,17 @@ function buildCharts(sample) {
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
     
-    var yticks = otu_ids.sort((a,b) => 
-    b - a).slice(0,10).map(id => "OTU " + id.toString());
+    var yticks = sample_result.sort((a,b) => 
+    b.sample_values - a.sample_values).slice(0,10).reverse().map(id => "OTU " + id.otu_ids.toString());
+    
+    var x = sample_result.sort((a,b) => 
+    b.sample_values - a.sample_values).slice(0,10).reverse().map(value => value.sample_values)
 
+    console.log(x)
     // console.log(otu_ids
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = [{
-      x: sample_values,
+      x: x,
       y: yticks,
       type: "bar",
       orientation: "h",
