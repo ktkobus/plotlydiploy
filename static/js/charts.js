@@ -81,9 +81,7 @@ function buildCharts(sample) {
 
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var sample_result = []
-   
-    // var otu_ids = result.otu_ids;
-    // var otu_labels = result.otu_labels;
+    
     var sample_values = result.sample_values;
     console.log(sample_values)
     
