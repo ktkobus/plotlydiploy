@@ -67,7 +67,10 @@ function buildCharts(sample) {
     // Deliverable 1: 5. Create a variable that holds the first sample in the array.
     var resultArray = selectedSample.filter(sampleObj => sampleObj.id == sample);
     var result = resultArray[0];
+    console.log("this is my result")
     console.log(result);
+    
+    
     // Deliverable 3: 1. Create a variable that filters the metadata array for the object with the desired sample number.
    
     
@@ -79,8 +82,8 @@ function buildCharts(sample) {
     // Deliverable 1: 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
     var sample_result = []
    
-    var otu_ids = result.otu_ids;
-    var otu_labels = result.otu_labels;
+    // var otu_ids = result.otu_ids;
+    // var otu_labels = result.otu_labels;
     var sample_values = result.sample_values;
     console.log(sample_values)
     
@@ -122,35 +125,49 @@ function buildCharts(sample) {
     Plotly.newPlot("bar", barData, barLayout);
 
     // Deliverable 2: 1. Create the trace for the bubble chart.
-    var sampleOtuIDs = sample_result.sort((a,b) => 
-    b.sample_values - a.sample_values).map(id => "OTU " + id.otu_ids.toString());
+    var sampleOtuIDs = sample_result.map(id => id.otu_ids);
+
+    console.log("this is the sample OTU Id for bubble chart")
+    console.log(sampleOtuIDs)
     
-    var sampleOtuLabel = sample_result.sort((a,b) => 
-    b.sample_values - a.sample_values).map(label => label.otu_labels);
+
+    var sampleOtuLabel = sample_result.map(label => label.otu_labels);
     
-    var sampleValues = sample_result.sort((a,b) => 
-    b.sample_values - a.sample_values).map(value => value.sample_values);
+    var sampleValues = sample_result.map(value => value.sample_values);
     
-    console.log(sampleOtuIDs);
+    console.log("This is my sampleValues");
+    console.log(sampleValues);
     
-    var bubbleTrace= {
-      x: sampleOtuIDs,
-      y: sampleValues,
-      text: [sampleOtuLabel],
+    var xdata = sampleOtuIDs
+    var ydata = sampleValues
+
+    function bubbleChart(xdata,ydata) {
+    var trace1 = {
+      x: xdata,
+      y: ydata,
+      text: sampleOtuLabel,
       mode: 'markers',
       marker: {
         color: sampleOtuIDs,
+        colorscale: 'Earth',
+        opacity: 0.7,
         size: sampleValues
-      }
     }
-    
+    };
+
+    var data = [trace1];
+
     // Deliverable 2: 2. Create the layout for the bubble chart.
     var bubbleLayout = {
-      title: "Bacteria Cultures Per Sample",
-      xaxis: {title: "OTU ID"}
-    }
+      title: 'Bacteria Cultures Per Sample',
+      showlegend: false,
+      height: 500,
+      width: 1200
+    };
 
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
+    Plotly.newPlot('bubble', data, bubbleLayout);}
+    bubbleChart(xdata,ydata)
     
     // Deliverable 3: 4. Create the trace for the gauge chart.
     
