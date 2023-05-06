@@ -1,0 +1,17 @@
+body {
+
+    color: #000000;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color:darkcyan
+}
+
+.jumbotron {
+    
+    background-image: url("../../images/microbial-diversity.jpg");
+    background-size: 100% 100%;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 2px 4px 4px #333030;
+    
+}
+
