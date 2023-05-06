@@ -11,4 +11,6 @@
 
 ![bubble_chart](Resources/bubble_chart.png)
 
+![gauge](Resources/gauge.png)
+
 ## Summary
